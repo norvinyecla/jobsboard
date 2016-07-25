@@ -15,6 +15,7 @@ use App\Job;
 
 Route::get('/jobs', 'JobController@index');
 Route::get('/', 'JobController@index');
+Route::get('/home', 'JobController@index');
 
 /*Route::group(['middleware' => ['auth']], function(){
 	Route::get('new-job', 'JobController@create');
@@ -25,12 +26,13 @@ Route::get('/', 'JobController@index');
 });*/
 
 Route::group(['middleware' => ['auth']], function(){
-	Route::get('new-job', 'JobController@create');
-	Route::post('new-job', 'JobController@store');
-	Route::get('edit/{slug}', 'JobController@edit');
-	Route::post('update', 'JobController@update');
+	Route::get('jobs/show/{id}', 'JobController@show');
+	Route::get('jobs/add', 'JobController@create');
+	Route::post('jobs/add', 'JobController@store');
+	Route::get('jobs/edit/{slug}', 'JobController@edit');
+	Route::post('jobs/edit', 'JobController@update');
 	Route::get('delete/{id}', 'JobController@destroy');
 });
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');

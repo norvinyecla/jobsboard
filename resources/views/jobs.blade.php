@@ -11,13 +11,21 @@
                         <div class="panel-body">
                             <h3>{{ $job->title }}</h3>
                             <p>{{ $job->description }}</p>
+                            @if ($job->employer_id == Auth::id())
+                                <a href="{{ url('jobs/show/'.$job->id)}}">Show</a> | 
+                                <a>Edit</a>
+                            @endif
                         </div>
                     @endforeach
+
 
                 @else
                     Goodbye!
                 @endif
+                <div class="panel-body">
+                    {!! $jobs->render() !!}
                 </div>
+                
             </div>
         </div>
     </div>
