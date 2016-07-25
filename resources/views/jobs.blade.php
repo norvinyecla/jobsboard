@@ -9,11 +9,10 @@
                     <div class="panel-heading">Jobs</div>
                     @foreach ($jobs as $job)
                         <div class="panel-body">
-                            <h3>{{ $job->title }}</h3>
+                            <h3><a href="{{ url('jobs/show/'.$job->id)}}">{{ $job->title }}</a></h3>
                             <p>{{ $job->description }}</p>
                             @if ($job->employer_id == Auth::id())
-                                <a href="{{ url('jobs/show/'.$job->id)}}">Show</a> | 
-                                <a>Edit</a>
+                                <a href="{{ url('jobs/edit/'.$job->id) }}">Edit</a>
                             @endif
                         </div>
                     @endforeach
