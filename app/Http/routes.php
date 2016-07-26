@@ -13,7 +13,7 @@
 
 use App\Job;
 
-Route::get('/jobs', 'JobController@index');
+Route::get('/jobs', ['as' => 'jobs.index', 'uses' => 'JobController@index']);
 Route::get('/', 'JobController@index');
 Route::get('/home', 'JobController@index');
 Route::get('jobs/show/{id}', ['as' => 'jobs.show', 'uses' => 'JobController@show']);
@@ -30,8 +30,8 @@ Route::group(['as' => 'jobs.', 'middleware' => ['auth']], function(){
 	Route::get('jobs/add', ['as' => 'create', 'uses' => 'JobController@create']);
 	Route::post('jobs/add', ['as' => 'store', 'uses' => 'JobController@store']);
 	Route::get('jobs/edit/{id}', ['as' => 'edit', 'uses' => 'JobController@edit']);
-	Route::post('jobs/edit', ['as' => 'update', 'uses' => 'JobController@update']);
-	Route::get('delete/{id}', 'JobController@destroy');
+	Route::patch('jobs/edit', ['as' => 'update', 'uses' => 'JobController@update']);
+	Route::delete('delete/{id}', 'JobController@destroy');
 });
 Route::auth();
 

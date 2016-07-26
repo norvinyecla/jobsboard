@@ -73,6 +73,8 @@
                             </div>
                         </div>
                         </form>
+
+                        <p><a href="{{ URL::previous() }}">Go Back</a></p>
                 </div>
             </div>
         </div>

@@ -19,12 +19,20 @@
 
                     <h4>Description</h4>
                     <p>{{ $job->description }}</p>
-                    @if (!Auth::guest() && $job->employer_id == Auth::id())
-                        <a href="{{ route('jobs.edit',    array($job->id)) }}">Edit this Job Post</a>
+                    @if (!Auth::guest() and $job->employer_id == Auth::id())
+                        
+                        {!! Form::open(['action' => ['JobController@destroy', $job->id], 'method' => 'delete']) !!}
+                            <a href="{{ route('jobs.edit', array($job->id)) }}" class="btn btn-info btn-mini">Edit this Job Post</a>
+                          {!! Form::submit('Delete this Job', ['class'=>'btn btn-danger btn-mini']) !!}
+                        {!! Form::close() !!}
                     @endif
+                    <br>
+                    <p><a href="{{ route('jobs.index') }}" class="btn btn-warning">Go Back to Jobs</a></p>
                 </div>
+                
             </div>
         </div>
     </div>
 </div>
 @endsection
+
