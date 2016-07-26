@@ -47,7 +47,7 @@ class JobController extends Controller
 
     }
 
-    public function update($id, Request $request){
+    public function update(Request $request){
         $this->validate($request, [
             'title' => 'required|max:50',
             'description' => 'required|max:100',
@@ -57,14 +57,16 @@ class JobController extends Controller
 
         $request->merge(array("employer_id" => \Auth::id()));        
         
-        $job = Job::find($id);
+        $job = Job::find($request['id']);
         $job['title'] = $request['title'];
         $job['description'] = $request['description'];
         $job['location'] = $request['location'];
         $job['salary'] = $request['salary'];
         $job['employer_id'] = $request['employer_id'];
-        $job->save();
-        return redirect('/jobs/show/'.$request['id']);
+        $job->update();
+
+        return redirect()->route('jobs.show', [ 'job' => $job])->with('success', 'Job updated.');;
+        
     }
 
     public function destroy(){

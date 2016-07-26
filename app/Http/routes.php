@@ -16,7 +16,7 @@ use App\Job;
 Route::get('/jobs', 'JobController@index');
 Route::get('/', 'JobController@index');
 Route::get('/home', 'JobController@index');
-Route::get('jobs/show/{id}', 'JobController@show');
+Route::get('jobs/show/{id}', ['as' => 'jobs.show', 'uses' => 'JobController@show']);
 
 /*Route::group(['middleware' => ['auth']], function(){
 	Route::get('new-job', 'JobController@create');
@@ -26,11 +26,11 @@ Route::get('jobs/show/{id}', 'JobController@show');
 	Route::get('delete/{id}', 'JobController@destroy');
 });*/
 
-Route::group(['middleware' => ['auth']], function(){
-	Route::get('jobs/add', 'JobController@create');
-	Route::post('jobs/add', 'JobController@store');
-	Route::get('jobs/edit/{id}', 'JobController@edit');
-	Route::post('jobs/edit', ['as' => 'jobs.update', 'uses' => 'JobController@update']);
+Route::group(['as' => 'jobs.', 'middleware' => ['auth']], function(){
+	Route::get('jobs/add', ['as' => 'create', 'uses' => 'JobController@create']);
+	Route::post('jobs/add', ['as' => 'store', 'uses' => 'JobController@store']);
+	Route::get('jobs/edit/{id}', ['as' => 'edit', 'uses' => 'JobController@edit']);
+	Route::post('jobs/edit', ['as' => 'update', 'uses' => 'JobController@update']);
 	Route::get('delete/{id}', 'JobController@destroy');
 });
 Route::auth();

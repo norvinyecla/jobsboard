@@ -7,7 +7,7 @@
             <div class="panel panel-default">             
                 <div class="panel-heading">Add a New Job</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/new-job') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/jobs/add') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Job Title</label>

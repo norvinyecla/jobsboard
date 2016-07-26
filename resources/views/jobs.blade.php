@@ -11,7 +11,7 @@
                         <div class="panel-body">
                             <h3><a href="{{ url('jobs/show/'.$job->id)}}">{{ $job->title }}</a></h3>
                             <p>{{ $job->description }}</p>
-                            @if ($job->employer_id == Auth::id())
+                            @if (Auth::guest() && $job->employer_id == Auth::id())
                                 <a href="{{ url('jobs/edit/'.$job->id) }}">Edit</a>
                             @endif
                         </div>

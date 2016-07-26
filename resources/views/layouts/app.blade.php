@@ -47,7 +47,10 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <?php //echo <li><a href="{{ url('/jobs') }}">Jobs</a></li> ?>
+                    @if (!Auth::guest() and Auth::user()->canPostJob())
+                        <li><a href="{{ url('/jobs/add') }}">Post Job</a></li>
+                    @endif 
                 </ul>
 
                 <!-- Right Side Of Navbar -->
