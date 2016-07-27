@@ -8,6 +8,7 @@
                 <div class="panel-heading">Edit a New Job</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/jobs/edit') }}">
+                    <input name="_method" value="PATCH" type="hidden">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$job->id}}">
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -74,10 +75,13 @@
                         </div>
                         </form>
 
-                        <p><a href="{{ URL::previous() }}">Go Back</a></p>
+                        <p><a  class="btn btn-warning  " href="{{ route('jobs.show', [ 'job' => $job]) }}">Go back to show job</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 @endsection
+

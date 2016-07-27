@@ -21,7 +21,7 @@
                     <p>{{ $job->description }}</p>
                     @if (!Auth::guest() and $job->employer_id == Auth::id())
                         
-                        {!! Form::open(['action' => ['JobController@destroy', $job->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['action' => ['JobController@destroy', $job->id], 'method' => 'delete', 'class' => 'delete-conf']) !!}
                             <a href="{{ route('jobs.edit', array($job->id)) }}" class="btn btn-info btn-mini">Edit this Job Post</a>
                           {!! Form::submit('Delete this Job', ['class'=>'btn btn-danger btn-mini']) !!}
                         {!! Form::close() !!}
