@@ -18,8 +18,8 @@ class JobController extends Controller
     	return view('jobs', ['jobs' => $jobs, 'title' => $title]);
     }
 
-    public function show($var){
-        $job = Job::find($var);
+    public function show($id){
+        $job = Job::find($id);
         return view('jobs.show', ['job' => $job]);
     }
 
@@ -41,15 +41,39 @@ class JobController extends Controller
         return redirect('/');
     }
 
-    public function edit(){
+    public function edit($id){
+        $job = Job::find($id);
+        return view('jobs.edit', [ 'job' => $job]);
 
     }
 
-    public function update($data){
+    public function update(Request $request){
+        $this->validate($request, [
+            'title' => 'required|max:50',
+            'description' => 'required|max:100',
+            'location' => 'required|max:50',
+            'salary' => 'required'
+        ]);
 
+        $request->merge(array("employer_id" => \Auth::id()));        
+        
+        $job = Job::find($request['id']);
+        $job['title'] = $request['title'];
+        $job['description'] = $request['description'];
+        $job['location'] = $request['location'];
+        $job['salary'] = $request['salary'];
+        $job['employer_id'] = $request['employer_id'];
+        $job->update();
+
+        return redirect()->route('jobs.show', [ 'job' => $job])->with('success', 'Job updated.');;
+        
     }
 
-    public function destroy(){
+    public function destroy($id){
+        $job = Job::find($id);
+        $job->delete($job);
 
+
+        return redirect('/')->with('success', 'Job was deleted');
     }
 }
