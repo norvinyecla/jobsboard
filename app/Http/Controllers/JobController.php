@@ -11,15 +11,16 @@ use App\Job;
 class JobController extends Controller
 {
     public function index(){
-    	// fetch 3 posts from database
-    	$jobs = Job::orderBy('created_at', 'desc')->paginate(3);
+        // fetch 3 posts from database
+        $jobs = Job::orderBy('created_at', 'desc')->paginate(3);
 
-    	$title = "Latest Job Posts";
-    	return view('jobs', ['jobs' => $jobs, 'title' => $title]);
+        $title = "Latest Job Posts";
+        return view('jobs', ['jobs' => $jobs, 'title' => $title]);
     }
 
     public function show($id){
         $job = Job::find($id);
+        
         return view('jobs.show', ['job' => $job]);
     }
 

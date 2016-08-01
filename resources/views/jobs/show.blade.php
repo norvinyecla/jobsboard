@@ -11,8 +11,10 @@
                             {{ session('sucess') }}
                         </div>
                     @endif
-                    <h3>{{ $job->title}}</h3>
+                    <h3>{{ $job->title }}</h3> 
+                    <h4>{{ $job->employer->company }}</h4>
                     <h4>{{ $job->location }}</h4>
+
 
                     <h4>Salary</h4>
                     <p>{{ $job->salary }}</p>
