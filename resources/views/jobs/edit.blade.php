@@ -75,7 +75,7 @@
                         </div>
                         </form>
 
-                        <p><a  class="btn btn-warning  " href="{{ route('jobs.show', [ 'job' => $job]) }}">Go back to show job</a></p>
+                        <p><a  class="btn btn-warning" href="{{ route('jobs.show', [ 'job' => $job]) }}">Go back to show job</a></p>
                 </div>
             </div>
         </div>

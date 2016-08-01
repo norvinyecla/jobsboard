@@ -13,7 +13,7 @@
                             <label for="title" class="col-md-4 control-label">Job Title</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="title" class="form-control">
+                                <input type="text" name="title" class="form-control" value="@if(isset($job->title)){{$job->title}}@endif">
 
                                 @if ($errors->has('title'))
                                     <span class="help-block">
@@ -27,7 +27,7 @@
                             <label for="description" class="col-md-4 control-label">Job Description</label>
 
                             <div class="col-md-6">
-                                <textarea name="description" class="form-control"></textarea>
+                                <textarea name="description" class="form-control">@if(isset($job->description)){{$job->description}}@endif</textarea>
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -41,7 +41,7 @@
                             <label for="location" class="col-md-4 control-label">Location</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="location" class="form-control"> 
+                                <input type="text" name="location" class="form-control" value="@if(isset($job->location)){{$job->location}}@endif"> 
 
                                 @if ($errors->has('location'))
                                     <span class="help-block">
@@ -56,7 +56,7 @@
                             <label for="salary" class="col-md-4 control-label">Salary</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="salary" class="form-control">
+                                <input type="text" name="salary" class="form-control" value="@if(isset($job->salary)){{$job->salary}}@endif">
 
                                 @if ($errors->has('salary'))
                                     <span class="help-block">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         </form>
-                        <p><a href="{{ URL::previous() }}">Go Back</a></p>
+                        <p><a href="{{ route('jobs.index') }}" class="btn btn-warning">Go Back to Jobs</a></p>
                 </div>
 
             </div>
