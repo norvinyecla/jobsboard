@@ -20,7 +20,7 @@ class JobController extends Controller
 
     public function show($id){
         $job = Job::find($id);
-        
+
         return view('jobs.show', ['job' => $job]);
     }
 
@@ -31,7 +31,7 @@ class JobController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'title' => 'required|max:50',
-            'description' => 'required|max:100',
+            'description' => 'required|max:1000',
             'location' => 'required|max:50',
             'salary' => 'required'
         ]);
@@ -51,7 +51,7 @@ class JobController extends Controller
     public function update(Request $request){
         $this->validate($request, [
             'title' => 'required|max:50',
-            'description' => 'required|max:100',
+            'description' => 'required|max:1000',
             'location' => 'required|max:50',
             'salary' => 'required'
         ]);
