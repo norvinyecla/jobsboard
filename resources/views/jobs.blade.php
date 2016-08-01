@@ -18,7 +18,7 @@
                             <h4>{{ $job->employer->company }}</h4>
                             <p>{{ $job->description }}</p>
                             @if (!Auth::guest() and $job->employer_id == Auth::id())
-                                <a href="{{ url('jobs/edit/'.$job->id) }}">Edit this Job Post</a>
+                                <a href="{{ url('jobs/edit/'.$job->id) }}" class="btn btn-info">Edit this Job Post</a>
                             @endif
                         </div>
                     @endforeach
@@ -27,9 +27,9 @@
                         <h4>There are no jobs to display</h4>
                     </div>
                 @endif
-                <div class="panel-body">
+                <!--div class="panel-body">
                     {!! $jobs->render() !!}
-                </div>
+                </div-->
                 
             </div>
         </div>
