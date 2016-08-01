@@ -38,23 +38,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">Role</label>
-
-                            <div class="col-md-6">
-                                <select name="role">
-                                    <option value="employer" selected>Employer</option>
-                                    <option value="employee">Employee</option>
-                                </select>
-
-                                @if ($errors->has('role'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -78,6 +61,38 @@
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label">Role</label>
+
+                            <div class="col-md-6">
+                                <select name="role" class="form-control">
+                                    <option value="employer" selected>Employer</option>
+                                    <option value="employee">Employee</option>
+                                </select>
+
+                                @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('company') ? ' has-error' : '' }}">
+                            <label for="company" class="col-md-4 control-label">Company Name</label>
+
+                            <div class="col-md-6">
+                                <input id="company" type="text" class="form-control" name="company" value="{{ old('company') }}">
+
+                                @if ($errors->has('company'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('company') }}</strong>
                                     </span>
                                 @endif
                             </div>

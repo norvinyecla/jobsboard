@@ -10,6 +10,6 @@ class Job extends Model
 
 
     public function employer(){
-    	return $this->belongsTo('App/User', 'user_id');
+    	return $this->belongsTo('App\User', 'employer_id');
     }
 }
