@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         </form>
-                        <p><a href="{{ route('jobs.index') }}" class="btn btn-warning">Go Back to Jobs</a></p>
+                        <p><a href="{{ route('jobs.myjobposts') }}" class="btn btn-warning">Go Back to My Jobs</a></p>
                 </div>
 
             </div>

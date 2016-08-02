@@ -12,8 +12,8 @@ class JobController extends Controller
 {
     public function index(){
         // fetch 3 posts from database
-        $jobs = Job::orderBy('created_at', 'desc')->paginate(3);
-
+        // $jobs = Job::all()->orderBy('created_at', 'desc')->paginate(3);
+        $jobs = Job::where('id', '>', '0')->orderBy('created_at', 'desc')->paginate(3);
         $title = "Latest Job Posts";
         return view('jobs', ['jobs' => $jobs, 'title' => $title]);
     }
@@ -23,6 +23,7 @@ class JobController extends Controller
         $jobs = Job::where('employer_id', \Auth::id())->orderBy('created_at', 'desc')->paginate(3);
 
         $title = "Latest Job Posts";
+
         return view('jobs', ['jobs' => $jobs, 'title' => $title]);
     }
 

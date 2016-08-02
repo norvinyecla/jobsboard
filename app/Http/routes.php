@@ -20,7 +20,7 @@ Route::get('jobs/show/{id}', ['as' => 'jobs.show', 'uses' => 'JobController@show
 
 Route::group(['as' => 'jobs.', 'middleware' => ['auth', 'App\Http\Middleware\AdminMiddleware']], function(){
 	Route::get('jobs/add', ['as' => 'create', 'uses' => 'JobController@create']);
-	Route::get('/jobs/my-job-posts', 'JobController@myJobPosts');
+	Route::get('/jobs/my-job-posts', ['as' => 'myjobposts', 'uses' => 'JobController@myJobPosts']);
 	Route::post('jobs/add', ['as' => 'store', 'uses' => 'JobController@store']);
 	Route::get('jobs/edit/{id}', ['as' => 'edit', 'uses' => 'JobController@edit']);
 	Route::patch('jobs/edit', ['as' => 'update', 'uses' => 'JobController@update']);
