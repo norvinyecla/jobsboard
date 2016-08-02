@@ -18,6 +18,14 @@ class JobController extends Controller
         return view('jobs', ['jobs' => $jobs, 'title' => $title]);
     }
 
+    public function myJobPosts(){
+        // fetch 3 posts from database
+        $jobs = Job::where('employer_id', \Auth::id())->orderBy('created_at', 'desc')->paginate(3);
+
+        $title = "Latest Job Posts";
+        return view('jobs', ['jobs' => $jobs, 'title' => $title]);
+    }
+
     public function show($id){
         $job = Job::find($id);
 
@@ -39,7 +47,7 @@ class JobController extends Controller
         $request->merge(array("employer_id" => \Auth::id()));        
         $data = $request->all();
         Job::create($data);
-        return redirect('/');
+        return redirect('/jobs/my-job-posts');
     }
 
     public function edit($id){
