@@ -11,15 +11,12 @@ use App\Job;
 class JobController extends Controller
 {
     public function index(){
-        // fetch 3 posts from database
-        // $jobs = Job::all()->orderBy('created_at', 'desc')->paginate(3);
         $jobs = Job::where('id', '>', '0')->orderBy('created_at', 'desc')->paginate(3);
         $title = "Latest Job Posts";
         return view('jobs', ['jobs' => $jobs, 'title' => $title]);
     }
 
     public function myJobPosts(){
-        // fetch 3 posts from database
         $jobs = Job::where('employer_id', \Auth::id())->orderBy('created_at', 'desc')->paginate(3);
 
         $title = "Latest Job Posts";
@@ -45,7 +42,7 @@ class JobController extends Controller
             'salary' => 'required'
         ]);
 
-        $request->merge(array("employer_id" => \Auth::id()));        
+        $request->merge(array("employer_id" => \Auth::id()));
         $data = $request->all();
         Job::create($data);
         return redirect('/jobs/my-job-posts');
@@ -82,7 +79,6 @@ class JobController extends Controller
     public function destroy($id){
         $job = Job::find($id);
         $job->delete($job);
-
 
         return redirect('/')->with('success', 'Job was deleted');
     }
