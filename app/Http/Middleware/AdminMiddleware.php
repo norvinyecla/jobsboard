@@ -4,8 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminMiddleware
-{
+class AdminMiddleware {
     /**
      * Handle an incoming request.
      *

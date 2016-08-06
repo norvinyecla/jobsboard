@@ -11,7 +11,7 @@ class UrlTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testHome()
     {
         $this->visit('/')
          ->click('Login')
@@ -19,28 +19,32 @@ class UrlTest extends TestCase
     }
 
     public function testUserLogin()
-	{
-    	$this->visit('/login')
+    {
+        $this->visit('/login')
          ->type('boss@gmail.com', 'email')
          ->type('123456', 'password')
          ->press('Login')
          ->seePageIs('/')
          ->see('Post Job');
-	}
+    }
 
-	public function testPostJobUrl(){
-		$user = factory(App\User::class)->create();
-		$user->role = "employer";
+    public function testPostJobUrl(){
+        $user = $this->generateEmployer();
+        $this->actingAs($user)
+        ->visit('/jobs/add')
+        ->see('Add a New Job');
+    }
 
-		$this->actingAs($user)
-		->visit('/jobs/add')
-		->see('Add a New Job');
-	}
-
-	public function testUserLogout()
-	{
-    	$this->visit('/logout')
-    	->seePageIs('/')
+    public function testUserLogout()
+    {
+        $this->visit('/logout')
+        ->seePageIs('/')
         ->see('Login');
-	}
+    }
+
+    public function generateEmployer(){
+        $user = factory(App\User::class)->create();
+        $user->role = "employer";
+        return $user;
+    }
 }
