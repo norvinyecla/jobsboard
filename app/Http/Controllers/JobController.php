@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Job;
 
 class JobController extends Controller
@@ -18,7 +17,6 @@ class JobController extends Controller
 
     public function myJobPosts(){
         $jobs = Job::where('employer_id', \Auth::id())->orderBy('created_at', 'desc')->paginate(3);
-
         $title = "Latest Job Posts";
 
         return view('jobs', ['jobs' => $jobs, 'title' => $title]);
@@ -26,7 +24,6 @@ class JobController extends Controller
 
     public function show($id){
         $job = Job::find($id);
-
         return view('jobs.show', ['job' => $job]);
     }
 
@@ -50,6 +47,11 @@ class JobController extends Controller
 
     public function edit($id){
         $job = Job::find($id);
+
+        if (Gate::denies('update', $job)) {
+            abort(403);
+        }
+
         return view('jobs.edit', [ 'job' => $job]);
 
     }
@@ -65,6 +67,11 @@ class JobController extends Controller
         $request->merge(array("employer_id" => \Auth::id()));        
         
         $job = Job::find($request['id']);
+
+        if (Gate::denies('update', $job)) {
+            abort(403);
+        }
+        
         $job['title'] = $request['title'];
         $job['description'] = $request['description'];
         $job['location'] = $request['location'];
@@ -78,6 +85,9 @@ class JobController extends Controller
 
     public function destroy($id){
         $job = Job::find($id);
+        if (Gate::denies('delete', $job)) {
+            abort(403);
+        }
         $job->delete($job);
 
         return redirect('/')->with('success', 'Job was deleted');
