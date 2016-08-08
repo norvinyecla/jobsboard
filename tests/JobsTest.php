@@ -26,6 +26,18 @@ class JobsTest extends TestCase
         ->see('Developer123');
     }
 
+    public function testEditJob(){
+        $user = $this->generateEmployer();
+        $this->actingAs($user)
+        ->visit('/jobs/edit/3')
+        ->type('Developer456', 'title')
+        ->type('description111', 'description')
+        ->type('Pasig', 'location')
+        ->type('20000', 'salary')
+        ->press('Submit')
+        ->see('Developer456');
+    }
+
     public function generateEmployer(){
         $user = factory(App\User::class)->create();
         $user->role = "employer";
